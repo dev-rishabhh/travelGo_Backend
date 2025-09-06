@@ -36,7 +36,7 @@ app.use(cors({
 ))
 
 app.get("/",async(req,res)=>{
-    res.json({message:"hello developer"})
+    res.json({message:process.env.CLIENT_URL})
 })
 
 app.use("/tours",tourRouter)
