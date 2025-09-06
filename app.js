@@ -50,5 +50,5 @@ app.use("/bookings",checkAuth,bookingRouter)
 
 
 app.listen(process.env.PORT,()=>{
-    console.log("server started");
+    console.log("server started now");
 })
