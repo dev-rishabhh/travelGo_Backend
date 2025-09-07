@@ -1,5 +1,6 @@
 import express from "express"
 import cors from "cors"
+import helmet from "helmet";
 import './config/db.js'
 import cookieParser from "cookie-parser"
 import checkAuth from './middleware/auth.js'
@@ -14,10 +15,10 @@ import userRouter from "./router/userRouter.js"
 import adminRouter from "./router/adminRouter.js"
 import bookingRouter from "./router/bookingRouter.js"
 
-
 const app=express()
 
 
+app.use(helmet());
 app.use(express.json())
 
 app.use(cookieParser(process.env.SIGNED_SECRET))
