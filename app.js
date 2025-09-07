@@ -30,7 +30,7 @@ app.use((err,req,res,next)=>{
  })
 
 app.use(cors({
-   origin:"https://travel-go-frontend-u99v.vercel.app/",
+   origin:"https://travel-go-frontend-u99v.vercel.app",
    credentials:true,
 }
 ))
