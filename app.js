@@ -30,7 +30,7 @@ app.use((err,req,res,next)=>{
  })
 
 app.use(cors({
-   origin:"https://travel-go-frontend-u99v.vercel.app",
+   origin:process.env.CLIENT_URL,
    credentials:true,
 }
 ))
@@ -52,3 +52,5 @@ app.use("/bookings",checkAuth,bookingRouter)
 app.listen(process.env.PORT,()=>{
     console.log("server started now");
 })
+
+
