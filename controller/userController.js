@@ -72,8 +72,8 @@ export async function handleLogin(req, res) {
             httpOnly: true,
             signed: true,
             maxAge: 60 * 1000 * 60 * 24 * 7,
-            SameSite:"None",
-            secure:true
+            sameSite: 'none',
+            secure: true,
         });
 
         return res.status(200).json({
