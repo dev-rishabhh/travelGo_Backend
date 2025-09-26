@@ -75,6 +75,7 @@ export async function postTour(req, res) {
         })
         res.status(200).json({ message: "Tour Created Sucessfully" })
     } catch (error) {
+        console.log(error);
         res.status(400).json({ error: "Something Went Wrong" })
     }
 }
