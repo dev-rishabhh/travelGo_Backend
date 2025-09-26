@@ -68,14 +68,13 @@ export async function postTour(req, res) {
             price,
             category,
             publicId: public_id,
-            url: secure_url,
+            banner: secure_url,
             description,
             features: featuresArray,
 
         })
         res.status(200).json({ message: "Tour Created Sucessfully" })
     } catch (error) {
-        console.log(error);
         res.status(400).json({ error: "Something Went Wrong" })
     }
 }
