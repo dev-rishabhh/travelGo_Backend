@@ -19,7 +19,7 @@ export async function getBooking(req, res, next) {
 export async function postBooking(req, res, next) {
     try {
         const { _id, } = req.user
-        const { formData: { firstName, lastName, email, phone, address, city, zipCode, country, amount, specialRequests }, startDate, endDate, adults, children, slectedApartmentId } = req.body
+        const { formData: { firstName, lastName, email, phone, address, city, zipCode, country, specialRequests }, startDate, endDate, adults, children, slectedApartmentId } = req.body
         await Booking.insertOne({
             userId: _id,
             tourId: slectedApartmentId,
@@ -34,7 +34,6 @@ export async function postBooking(req, res, next) {
             city,
             zipCode,
             country,
-            amount,
             specialRequests
         })
         res.status(200).json({ message: "post booking route" })
@@ -43,37 +42,37 @@ export async function postBooking(req, res, next) {
     }
 
 }
-export async function checkoutSession(req, res, next) {
-    try {
-        const { selectedApartment } = req.body;
-        const selectedTour = await Tour.find({ _id: selectedApartment })
-        const {name,description,price}=selectedTour[0]
+// export async function checkoutSession(req, res, next) {
+//     try {
+//         const { selectedApartment } = req.body;
+//         const selectedTour = await Tour.find({ _id: selectedApartment })
+//         const {name,description,price}=selectedTour[0]
 
-        const session = await stripe.checkout.sessions.create({
-            payment_method_types: ["card"],
-            line_items: [
-                {
-                    price_data: {
-                        currency: "inr",
-                        product_data: {
-                            name,
-                            description
-                            // images:
-                        },
-                        unit_amount: price * 100,
-                    },
-                    quantity: 1
-                }
+//         const session = await stripe.checkout.sessions.create({
+//             payment_method_types: ["card"],
+//             line_items: [
+//                 {
+//                     price_data: {
+//                         currency: "inr",
+//                         product_data: {
+//                             name,
+//                             description
+//                             // images:
+//                         },
+//                         unit_amount: price * 100,
+//                     },
+//                     quantity: 1
+//                 }
 
-            ],
-            mode: "payment",
-            success_url:`${process.env.CLIENT_URL}/success`,
-            cancel_url: `${process.env.CLIENT_URL}/cancel`,
-        });
+//             ],
+//             mode: "payment",
+//             success_url:`${process.env.CLIENT_URL}/success`,
+//             cancel_url: `${process.env.CLIENT_URL}/cancel`,
+//         });
 
-        res.json({ id: session.id })
-    } catch (error) {
-        next(error)
-    }
+//         res.json({ id: session.id })
+//     } catch (error) {
+//         next(error)
+//     }
 
-}
+// }

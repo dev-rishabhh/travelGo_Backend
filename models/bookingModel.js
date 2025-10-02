@@ -53,10 +53,6 @@ const bookingSchema = new Schema({
     specialRequests: {
         type: String,
     },
-    amount: {
-        type: Number,
-        required: true
-    }
 
 },
 {strict:"throw"}
