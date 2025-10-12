@@ -35,6 +35,8 @@ app.use(cors({
    credentials:true,
 }
 ))
+console.log(process.env.CLIENT_URL);
+
 app.get("/",async(req,res)=>{
     res.json({message:"server started"})
 })
