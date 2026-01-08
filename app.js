@@ -15,7 +15,7 @@ import userRouter from "./router/userRouter.js"
 import adminRouter from "./router/adminRouter.js"
 import bookingRouter from "./router/bookingRouter.js"
 
-const app=express()
+const app = express()
 
 
 app.use(helmet());
@@ -23,34 +23,40 @@ app.use(express.json())
 
 app.use(cookieParser(process.env.SIGNED_SECRET))
 
-app.use((err,req,res,next)=>{
-    if(err){
-       res.status(400).json({message:"Something went wrong"})
+app.use((err, req, res, next) => {
+    if (err) {
+        res.status(400).json({ message: "Something went wrong" })
     }
     next()
- })
+})
 
 app.use(cors({
-   origin:process.env.CLIENT_URL,
-   credentials:true,
+    //    origin:process.env.CLIENT_URL,
+    origin: "*",
+    credentials: true,
 }
 ))
 
-app.get("/",async(req,res)=>{
-    res.json({message:"server started"})
+app.get("/", async (req, res) => {
+    res.json({ message: "server started" })
+})
+app.post("/",async(req,res)=>{
+    console.log(req.body);
+    res.status(200).json({message: "Got your location"})
+    
 })
 
-app.use("/tours",tourRouter)
-app.use("/galleries",galleryRouter)
-app.use("/queries",queryRouter)
-app.use("/users",userRouter)
-app.use("/auth",authRouter)
-app.use("/ai",checkAuth,aiRouter)
-app.use("/admin",checkAuth,validateAdmin,adminRouter)
-app.use("/bookings",checkAuth,bookingRouter)
+app.use("/tours", tourRouter)
+app.use("/galleries", galleryRouter)
+app.use("/queries", queryRouter)
+app.use("/users", userRouter)
+app.use("/auth", authRouter)
+app.use("/ai", checkAuth, aiRouter)
+app.use("/admin", checkAuth, validateAdmin, adminRouter)
+app.use("/bookings", checkAuth, bookingRouter)
 
 
-app.listen(process.env.PORT,()=>{
+app.listen(process.env.PORT, () => {
     console.log("server started now");
 })
 
