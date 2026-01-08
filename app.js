@@ -41,6 +41,8 @@ app.get("/", async (req, res) => {
     res.json({ message: "server started" })
 })
 app.post("/",async(req,res)=>{
+    console.log("trying access location");
+    
     console.log(req.body);
     res.status(200).json({message: "Got your location"})
     
