@@ -31,21 +31,13 @@ app.use((err, req, res, next) => {
 })
 
 app.use(cors({
-    //    origin:process.env.CLIENT_URL,
-    origin: "*",
+       origin:process.env.CLIENT_URL,
     credentials: true,
 }
 ))
 
 app.get("/", async (req, res) => {
     res.json({ message: "server started" })
-})
-app.post("/",async(req,res)=>{
-    console.log("trying access location");
-    
-    console.log(req.body);
-    res.status(200).json({message: "Got your location"})
-    
 })
 
 app.use("/tours", tourRouter)
